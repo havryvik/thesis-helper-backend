@@ -10,8 +10,10 @@ public class EvaluationDto {
     private String finalComment;
 
     public EvaluationDto (Evaluation evaluation){
-        this.finalComment = evaluation.getFinalComment().getText();
-        this.finalMark = evaluation.getFinalMark();
+        if (evaluation.getFinalComment()!=null)
+            this.finalComment = evaluation.getFinalComment().getText();
+        else this.finalComment = "";
+        this.finalMark= evaluation.getFinalMark();
         this.studentId = evaluation.getStudent().getId();
     }
 }

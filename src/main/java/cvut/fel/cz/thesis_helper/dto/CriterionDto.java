@@ -4,13 +4,14 @@ import cvut.fel.cz.thesis_helper.model.Criterion;
 import lombok.Data;
 
 @Data
-public class CriterionDto extends RequirementDto{
-    private Integer Number;
-    private String Comment;
+public class CriterionDto {
+    private Integer id;
+    private Integer value;
+    private Integer number;
+    private String comment;
 
     public Criterion toCriterion(){
         Criterion criterion = new Criterion();
-        criterion.setName(this.getName());
         criterion.setValue(this.getValue());
         criterion.setNumber(getNumber());
         return criterion;
@@ -18,7 +19,6 @@ public class CriterionDto extends RequirementDto{
 
     public CriterionDto(Criterion criterion){
         this.setId(criterion.getId());
-        this.setName(criterion.getName());
         if(criterion.getValue()!=null)
             this.setValue(criterion.getValue());
         if(criterion.getComment()!=null)

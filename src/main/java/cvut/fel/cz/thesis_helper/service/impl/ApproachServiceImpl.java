@@ -155,8 +155,7 @@ public class ApproachServiceImpl implements ApproachService {
         Evaluation evaluation = student.getEvaluation();
         List<Requirement> requirements = evaluation.getRequirements();
         if (requirements!=null){
-            List<Requirement> tmpReq = requirements.stream().filter(requirement -> requirement.getBlockNumber()==null).collect(Collectors.toList());
-            return tmpReq.stream().map(RequirementDto::new).collect(Collectors.toList());
+            return requirements.stream().map(RequirementDto::new).collect(Collectors.toList());
         }
         return null;
     }
