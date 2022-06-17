@@ -28,6 +28,6 @@ public class EvalPerBlock extends AbstractEntity {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = "comment_id")
-    private Comment comment;
+    private FinalComment finalComment;
 
 }

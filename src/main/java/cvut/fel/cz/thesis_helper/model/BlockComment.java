@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "block_comment")
 @Data
-public class BlockComment extends Comment {
+public class BlockComment extends AbstractComment {
     @Column(name = "block_number", nullable = false)
     private Integer blockNumber;
 

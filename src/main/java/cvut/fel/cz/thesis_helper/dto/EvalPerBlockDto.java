@@ -1,15 +1,14 @@
 package cvut.fel.cz.thesis_helper.dto;
 
 import cvut.fel.cz.thesis_helper.model.EvalPerBlock;
-import cvut.fel.cz.thesis_helper.model.Evaluation;
-import cvut.fel.cz.thesis_helper.model.Requirement;
 import lombok.Data;
-import org.springframework.data.jpa.repository.JpaRepository;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 public class EvalPerBlockDto{
     private String value;
     private Integer blockNumber;
@@ -26,8 +25,9 @@ public class EvalPerBlockDto{
     public EvalPerBlockDto(EvalPerBlock evalPerBlock){
         this.blockNumber = evalPerBlock.getBlockNumber();
         this.value = evalPerBlock.getValue();
-        this.comment = evalPerBlock.getComment().getText();
-        this.criterionDtos = evalPerBlock.getCriteria().stream().map(CriterionDto::new).collect(Collectors.toList());
+        this.comment = evalPerBlock.getFinalComment().getText();
+        this.criterionDtos = evalPerBlock.getCriteria()
+                .stream().map(CriterionDto::new).collect(Collectors.toList());
     }
 
 

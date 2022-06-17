@@ -1,7 +1,6 @@
 package cvut.fel.cz.thesis_helper.security;
 
 
-import cvut.fel.cz.thesis_helper.exception.JwtAuthenticationException;
 import cvut.fel.cz.thesis_helper.model.Role;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
 
@@ -72,15 +73,16 @@ public class TokenProvider {
     }
 
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token, HttpServletResponse response) throws IOException {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             if (claims.getBody().getExpiration().before(new Date())) {
                 return false;
             }
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            throw new JwtAuthenticationException("JWT token is expired or invalid");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
         }
     }
 }

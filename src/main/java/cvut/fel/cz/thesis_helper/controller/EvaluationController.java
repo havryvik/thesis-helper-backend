@@ -1,19 +1,11 @@
 package cvut.fel.cz.thesis_helper.controller;
 
-import cvut.fel.cz.thesis_helper.controller.util.RestUtils;
-import cvut.fel.cz.thesis_helper.dto.AccountDto;
-import cvut.fel.cz.thesis_helper.dto.EvalPerBlockDto;
-import cvut.fel.cz.thesis_helper.dto.EvaluationDto;
-import cvut.fel.cz.thesis_helper.dto.RequirementDto;
-import cvut.fel.cz.thesis_helper.model.EvalPerBlock;
+import cvut.fel.cz.thesis_helper.dto.*;
 import cvut.fel.cz.thesis_helper.service.impl.EvaluationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -46,6 +38,11 @@ public class EvaluationController {
     @GetMapping("/{evaluationId}")
     public EvaluationDto getEvaluation( @PathVariable Integer evaluationId){
         return evaluationService.getEvaluation(evaluationId);
+    }
+
+    @GetMapping("/{evaluationId}/overview")
+    public EvaluationFullDto getEvaluationOverview(@PathVariable Integer evaluationId){
+        return evaluationService.getEvaluationOverview(evaluationId);
     }
 
     @PutMapping("/{evaluationId}/extra-requirements")

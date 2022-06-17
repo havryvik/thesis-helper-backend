@@ -79,7 +79,7 @@ public class SupervisorController {
     }
 
     @GetMapping("/{studentId}/evaluation")
-    public void getStudentEvaluation(@PathVariable Integer studentId){
-        supervisorService.getStudentEval(studentId);
+    public EvaluationDto getStudentEvaluation(@PathVariable Integer studentId){
+        return supervisorService.getStudentEval(studentId);
     }
 }

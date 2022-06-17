@@ -140,8 +140,8 @@ public class ApproachServiceImpl implements ApproachService {
         if(approachOpt.isEmpty())
             throw ApproachException.approachByIdNotFound(approachId);
         Approach approach = approachOpt.get();
-        if(approach.getWeights()==null)
-            throw ApproachException.weightsDoesNotExists();
+//        if(approach.getWeights()==null)
+//            throw ApproachException.weightsDoesNotExists();
         return approach.getWeights();
     }
 

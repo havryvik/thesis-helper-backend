@@ -1,9 +1,6 @@
 package cvut.fel.cz.thesis_helper.service.impl;
 
-import cvut.fel.cz.thesis_helper.dto.CriterionDto;
-import cvut.fel.cz.thesis_helper.dto.EvalPerBlockDto;
-import cvut.fel.cz.thesis_helper.dto.EvaluationDto;
-import cvut.fel.cz.thesis_helper.dto.RequirementDto;
+import cvut.fel.cz.thesis_helper.dto.*;
 import cvut.fel.cz.thesis_helper.exception.ApproachException;
 import cvut.fel.cz.thesis_helper.exception.EvaluationException;
 import cvut.fel.cz.thesis_helper.model.*;
@@ -71,7 +68,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     @Override
     public void updateEvaluation(Integer evaluationId, EvaluationDto evaluationDto) {
         Evaluation evaluation = findById(evaluationId);
-        Comment finalComment = new Comment();
+        FinalComment finalComment = new FinalComment();
         finalComment.setText(evaluationDto.getFinalComment());
         commentRepository.save(finalComment);
         evaluation.setFinalComment(finalComment);
@@ -89,12 +86,12 @@ public class EvaluationServiceImpl implements EvaluationService {
         } else {
             EvalPerBlock evalPerBlock = evalPerBlockOpt.get();
             evalPerBlock.setValue(evalPerBlockDto.getValue());
-            evalPerBlock.getComment().setText(evalPerBlockDto.getComment());
+            evalPerBlock.getFinalComment().setText(evalPerBlockDto.getComment());
             List<CriterionDto> criteria = evalPerBlockDto.getCriterionDtos();
             evalPerBlock.getCriteria().forEach(criterion -> {
                     for(CriterionDto cr: criteria ){
                         if(Objects.equals(cr.getNumber(), criterion.getNumber())) {
-                            criterion.getComment().setText(cr.getComment());
+                            criterion.getFinalComment().setText(cr.getComment());
                             criterion.setValue(cr.getValue());
                             criterionRepository.save(criterion);
                             break;
@@ -107,19 +104,21 @@ public class EvaluationServiceImpl implements EvaluationService {
 
     private void saveNewEvalPerBlock(EvalPerBlockDto evalPerBlockDto, Evaluation evaluation){
         EvalPerBlock evalPerBlock = evalPerBlockDto.toEvalPerBlock();
-        Comment comment = new Comment();
-        comment.setText(evalPerBlockDto.getComment());
-        commentRepository.save(comment);
-        evalPerBlock.setComment(comment);
-        List<Criterion> criteria = evalPerBlockDto.getCriterionDtos().stream().map(criterionDto -> {
-            Criterion criterion = criterionDto.toCriterion();
-            Comment comment1 = new Comment();
-            comment1.setText(criterionDto.getComment());
-            commentRepository.save(comment1);
-            criterion.setComment(comment1);
-            return criterionRepository.save(criterion);
-        }).collect(Collectors.toList());
-        evalPerBlock.setCriteria(criteria);
+        FinalComment finalComment = new FinalComment();
+        finalComment.setText(evalPerBlockDto.getComment());
+        commentRepository.save(finalComment);
+        evalPerBlock.setFinalComment(finalComment);
+        if(evalPerBlockDto.getCriterionDtos() != null) {
+            List<Criterion> criteria = evalPerBlockDto.getCriterionDtos().stream().map(criterionDto -> {
+                Criterion criterion = criterionDto.toCriterion();
+                FinalComment finalComment1 = new FinalComment();
+                finalComment1.setText(criterionDto.getComment());
+                commentRepository.save(finalComment1);
+                criterion.setFinalComment(finalComment1);
+                return criterionRepository.save(criterion);
+            }).collect(Collectors.toList());
+            evalPerBlock.setCriteria(criteria);
+        }
         evalPerBlockRepository.save(evalPerBlock);
         evaluation.getEvalPerBlocks().add(evalPerBlock);
         evaluationRepository.save(evaluation);
@@ -139,12 +138,12 @@ public class EvaluationServiceImpl implements EvaluationService {
         requirementDtos.forEach(requirementDto -> {
             Requirement requirement = requirements.stream().filter(requirement1 -> Objects.equals(requirement1.getId(), requirementDto.getId())).findFirst().get();
             requirement.setValue(requirementDto.getValue());
-            if (requirement.getComment()==null) {
-                Comment comment = new Comment();
-                comment.setText(requirementDto.getComment());
-                commentRepository.save(comment);
+            if (requirement.getFinalComment()==null) {
+                FinalComment finalComment = new FinalComment();
+                finalComment.setText(requirementDto.getComment());
+                commentRepository.save(finalComment);
             } else{
-                requirement.getComment().setText(requirementDto.getComment());
+                requirement.getFinalComment().setText(requirementDto.getComment());
             }
             requirementRepository.save(requirement);
         });
@@ -163,5 +162,11 @@ public class EvaluationServiceImpl implements EvaluationService {
         if(evalPerBlock.isEmpty())
             throw EvaluationException.canNotFindBlockEval(blockNumber);
         return new EvalPerBlockDto(evalPerBlock.get());
+    }
+
+    @Override
+    public EvaluationFullDto getEvaluationOverview(Integer evaluationId) {
+        Evaluation evaluation = findById(evaluationId);
+        return new EvaluationFullDto(evaluation);
     }
 }

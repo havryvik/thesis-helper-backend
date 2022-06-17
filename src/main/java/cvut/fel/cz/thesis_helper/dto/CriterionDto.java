@@ -21,8 +21,8 @@ public class CriterionDto {
         this.setId(criterion.getId());
         if(criterion.getValue()!=null)
             this.setValue(criterion.getValue());
-        if(criterion.getComment()!=null)
-            this.setComment(criterion.getComment().getText());
+        if(criterion.getFinalComment()!=null)
+            this.setComment(criterion.getFinalComment().getText());
         this.setNumber(criterion.getNumber());
     }
 }

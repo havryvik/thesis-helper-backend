@@ -22,7 +22,7 @@ public class Evaluation extends AbstractEntity {
 
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "final_comment_id")
-    private Comment finalComment;
+    private FinalComment finalComment;
 
     @OneToMany(mappedBy = "evaluation", orphanRemoval = true)
     private List<Requirement> requirements = new ArrayList<>();

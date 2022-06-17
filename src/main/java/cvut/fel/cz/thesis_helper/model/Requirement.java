@@ -22,7 +22,7 @@ public class Requirement extends AbstractEntity {
 
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "comment_id")
-    private Comment comment;
+    private FinalComment finalComment;
 
     @Column(name = "value")
     private Integer value;

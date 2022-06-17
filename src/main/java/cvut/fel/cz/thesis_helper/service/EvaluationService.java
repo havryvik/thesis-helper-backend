@@ -2,6 +2,7 @@ package cvut.fel.cz.thesis_helper.service;
 
 import cvut.fel.cz.thesis_helper.dto.EvalPerBlockDto;
 import cvut.fel.cz.thesis_helper.dto.EvaluationDto;
+import cvut.fel.cz.thesis_helper.dto.EvaluationFullDto;
 import cvut.fel.cz.thesis_helper.dto.RequirementDto;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface EvaluationService {
     EvaluationDto getEvaluation(Integer evaluationId);
 
     EvalPerBlockDto getBlockEvaluation(Integer evaluationId, Integer blockNumber);
+
+    EvaluationFullDto getEvaluationOverview(Integer evaluationId);
 }

@@ -16,6 +16,7 @@ public class StudentDto {
     private String thesisField;
     private String thesisTheme;
     private Integer approachId;
+    private Integer evaluationId;
 
     public StudentDto (Student student){
         this.id = student.getId();
@@ -24,5 +25,7 @@ public class StudentDto {
         this.thesisField = student.getThesisField();
         this.thesisTheme = student.getThesisTheme();
         this.approachId = student.getApproach().getId();
+        if(student.getEvaluation()!=null)
+            this.evaluationId = student.getEvaluation().getId();
     }
 }

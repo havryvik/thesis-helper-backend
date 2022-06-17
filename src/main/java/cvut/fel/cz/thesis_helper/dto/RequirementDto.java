@@ -24,7 +24,7 @@ public class RequirementDto {
         this.name = requirement.getName();
         if(requirement.getValue()!=null)
             this.value = requirement.getValue();
-        if(requirement.getComment()!=null)
-            this.comment = requirement.getComment().getText();
+        if(requirement.getFinalComment()!=null)
+            this.comment = requirement.getFinalComment().getText();
     }
 }
