@@ -11,6 +11,9 @@ public class EvaluationDto {
     private Integer studentId;
     private Integer finalMark;
     private String finalComment;
+    private Integer actualMark;
+    private Double coefficient;
+    private Integer increment;
 
 
 
@@ -21,5 +24,8 @@ public class EvaluationDto {
         this.finalMark= evaluation.getFinalMark();
         this.studentId = evaluation.getStudent().getId();
         this.evaluationId = evaluation.getId();
+        this.actualMark = evaluation.getActualMark();
+        this.increment = evaluation.getIncrement();
+        this.coefficient = evaluation.getCoefficient();
     }
 }

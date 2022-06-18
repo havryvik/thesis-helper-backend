@@ -73,6 +73,9 @@ public class EvaluationServiceImpl implements EvaluationService {
         commentRepository.save(finalComment);
         evaluation.setFinalComment(finalComment);
         evaluation.setFinalMark(evaluationDto.getFinalMark());
+        evaluation.setCoefficient(evaluationDto.getCoefficient());
+        evaluation.setIncrement(evaluationDto.getIncrement());
+        evaluation.setActualMark(evaluationDto.getActualMark());
         evaluationRepository.save(evaluation);
     }
 

@@ -2,8 +2,10 @@ package cvut.fel.cz.thesis_helper.dto;
 
 import cvut.fel.cz.thesis_helper.model.Criterion;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class CriterionDto {
     private Integer id;
     private Integer value;

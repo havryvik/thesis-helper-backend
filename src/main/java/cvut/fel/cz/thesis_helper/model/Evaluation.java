@@ -30,4 +30,14 @@ public class Evaluation extends AbstractEntity {
     @OneToMany(orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "evaluation_id")
     private List<EvalPerBlock> evalPerBlocks = new ArrayList<>();
+
+    @Column(name = "actual_mark")
+    private Integer actualMark;
+
+    @Column(name = "increment")
+    private Integer increment;
+
+    @Column(name = "coefficient")
+    private Double coefficient;
+
 }
