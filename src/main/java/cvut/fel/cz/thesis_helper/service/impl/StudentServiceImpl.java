@@ -67,24 +67,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findByEmail(String email) {
-        Student student = studentRepository.findByEmail(email);
-        if (student==null)
-            throw UserExceptions.studentNotFoundException(email);
-        return student;
-    }
-
-    @Override
     public Student findById(Integer id) {
         Optional<Student> tmpStudent = studentRepository.findById(id);
         if (tmpStudent.isEmpty())
             throw UserExceptions.userNotFoundById(id);
         return tmpStudent.get();
-    }
-
-    @Override
-    public Supervisor getTeacher(Student student) {
-        return student.getSupervisor();
     }
 
     @Override

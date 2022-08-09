@@ -8,9 +8,8 @@ import java.util.List;
 
 public interface StudentService {
     Student register(Student student);
-    Student findByEmail(String email);
+
     Student findById(Integer id);
-    Supervisor getTeacher(Student student);
 
     List<RequirementDto> getExtraRequirements(Integer studentId);
 }

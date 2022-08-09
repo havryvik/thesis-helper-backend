@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/thesis_helper/evaluation")
 @CrossOrigin(allowedHeaders = {"authorization","content-type"}, origins = "http://localhost:3000")
-public class EvaluationController {
+public class  EvaluationController {
 
     private final EvaluationServiceImpl evaluationService;
 

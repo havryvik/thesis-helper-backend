@@ -10,8 +10,6 @@ import java.util.List;
 public interface EvaluationService {
     void addRequirementToEvaluationByApproachId(List<RequirementDto> requirementDto, Integer approachId);
 
-    List<RequirementDto> getRequirements(Integer evaluationId);
-
     void updateEvaluation(Integer evaluationId, EvaluationDto evaluationDto);
 
     void updateBlockEvaluation(Integer evaluationId, Integer blockNumber, EvalPerBlockDto evalPerBlockDto);

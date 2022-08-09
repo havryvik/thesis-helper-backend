@@ -55,15 +55,6 @@ public class EvaluationServiceImpl implements EvaluationService {
         });
     }
 
-    @Override
-    public List<RequirementDto> getRequirements(Integer evaluationId) {
-        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-        if (evaluationOptional.isEmpty())
-            throw ApproachException.approachByIdNotFound(evaluationId);
-        Evaluation evaluation = evaluationOptional.get();
-        return evaluation.getRequirements().stream().map(RequirementDto::new).collect(Collectors.toList());
-    }
-
 
     @Override
     public void updateEvaluation(Integer evaluationId, EvaluationDto evaluationDto) {
