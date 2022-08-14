@@ -1,0 +1,2 @@
+INSERT INTO role (role) VALUES ('SUPERVISOR');
+INSERT INTO role (role) VALUES ('STUDENT');

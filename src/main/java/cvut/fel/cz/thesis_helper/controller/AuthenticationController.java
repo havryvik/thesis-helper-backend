@@ -7,8 +7,6 @@ import cvut.fel.cz.thesis_helper.dto.AuthenticationResponseDto;
 import cvut.fel.cz.thesis_helper.model.Account;
 import cvut.fel.cz.thesis_helper.security.TokenProvider;
 import cvut.fel.cz.thesis_helper.service.impl.AccountServiceImpl;
-import cvut.fel.cz.thesis_helper.service.impl.StudentServiceImpl;
-import cvut.fel.cz.thesis_helper.service.impl.SupervisorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,15 +23,11 @@ public class AuthenticationController {
 
     private final BCryptPasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
-    private final SupervisorServiceImpl teacherService;
-    private final StudentServiceImpl studentService;
     private final AccountServiceImpl accountService;
 
     @Autowired
-    public AuthenticationController(BCryptPasswordEncoder passwordEncoder, TokenProvider tokenProvider, SupervisorServiceImpl teacherService, StudentServiceImpl studentService, AccountServiceImpl accountService) {
+    public AuthenticationController(BCryptPasswordEncoder passwordEncoder, TokenProvider tokenProvider, AccountServiceImpl accountService) {
         this.tokenProvider = tokenProvider;
-        this.teacherService = teacherService;
-        this.studentService = studentService;
         this.accountService = accountService;
         this.passwordEncoder = passwordEncoder;
     }

@@ -17,6 +17,8 @@ public class AccountDto {
     private String role;
     private String thesisField;
     private String thesisTheme;
+    private Integer approachId;
+    private Integer evaluationId;
 
 
     public Supervisor toSupervisor(Role role, String encodedPassword){
@@ -48,6 +50,9 @@ public class AccountDto {
         this.nameSurname = student.getNameSurname();
         this.thesisField = student.getThesisField();
         this.thesisTheme = student.getThesisTheme();
+        this.approachId = student.getApproach().getId();
+        if(student.getEvaluation()!=null)
+            this.evaluationId = student.getEvaluation().getId();
     }
 
     public AccountDto (Supervisor supervisor){

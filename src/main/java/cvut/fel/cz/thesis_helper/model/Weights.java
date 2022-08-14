@@ -1,6 +1,5 @@
 package cvut.fel.cz.thesis_helper.model;
 
-import cvut.fel.cz.thesis_helper.model.AbstractEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -20,9 +20,7 @@ public class ApproachDto {
     public Approach toApproach(){
         Approach approach = new Approach();
         approach.setFulfilmentEvaluation(FulfilmentEnum.valueOf(fulfilmentEvaluation));
-        System.out.println("FULFILLMENT - OK");
         approach.setBasicBlocksEvaluation(BasicBlocksEnum.valueOf(basicBlocksEvaluation));
-        System.out.println("BASIC - OK");
         approach.setCriterionEvaluation(criterionEvaluation);
         approach.setCoefficient(coefficient);
         approach.setAutoFulfilment(autoFulfilment);

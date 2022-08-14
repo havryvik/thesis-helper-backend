@@ -2,6 +2,7 @@ package cvut.fel.cz.thesis_helper.service.impl;
 
 import cvut.fel.cz.thesis_helper.dto.EvaluationDto;
 import cvut.fel.cz.thesis_helper.dto.StudentDto;
+import cvut.fel.cz.thesis_helper.dto.SupervisorDto;
 import cvut.fel.cz.thesis_helper.exception.EvaluationException;
 import cvut.fel.cz.thesis_helper.exception.UserExceptions;
 import cvut.fel.cz.thesis_helper.model.*;
@@ -102,5 +103,13 @@ public class SupervisorServiceImpl implements SupervisorService {
         if (evaluation==null)
             throw EvaluationException.studentDoesNotHaveEvaluation();
         return new EvaluationDto(evaluation);
+    }
+
+    @Override
+    public SupervisorDto getSupervisorByStudentId(Integer studentId) {
+        Student student = studentService.findById(studentId);
+        if (student.getSupervisor()!=null)
+            return new SupervisorDto(student.getSupervisor());
+        throw new UserExceptions("Student does not have a supervisor");
     }
 }

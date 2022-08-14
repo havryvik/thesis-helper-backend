@@ -1,7 +1,5 @@
 package cvut.fel.cz.thesis_helper.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

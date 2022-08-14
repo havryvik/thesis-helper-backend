@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 @Service
 public class EvaluationServiceImpl implements EvaluationService {
 
-    private final StudentServiceImpl studentService;
-    private final ApproachServiceImpl approachService;
     private final ApproachRepository approachRepository;
     private final StudentRepository studentRepository;
     private final EvaluationRepository evaluationRepository;
@@ -28,9 +26,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     private final EvalPerBlockRepository evalPerBlockRepository;
 
     @Autowired
-    public EvaluationServiceImpl(StudentServiceImpl studentService, ApproachServiceImpl approachService, ApproachRepository approachRepository, StudentRepository studentRepository, EvaluationRepository evaluationRepository, RequirementRepository requirementRepository, CommentRepository commentRepository, CriterionRepository criterionRepository, EvalPerBlockRepository evalPerBlockRepository) {
-        this.studentService = studentService;
-        this.approachService = approachService;
+    public EvaluationServiceImpl(ApproachRepository approachRepository, StudentRepository studentRepository, EvaluationRepository evaluationRepository, RequirementRepository requirementRepository, CommentRepository commentRepository, CriterionRepository criterionRepository, EvalPerBlockRepository evalPerBlockRepository) {
         this.approachRepository = approachRepository;
         this.studentRepository = studentRepository;
         this.evaluationRepository = evaluationRepository;

@@ -25,23 +25,13 @@ import java.util.stream.Collectors;
 @Slf4j
 public class StudentServiceImpl implements StudentService {
 
-    private Account getCurrentUser(){
-        final Account currentUser = SecurityUtils.getCurrentUser();
-        assert currentUser != null;
-        return currentUser;
-    }
-
     private final StudentRepository studentRepository;
-    private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
     private final ApproachRepository approachRepository;
     private final EvaluationRepository evaluationRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder, ApproachRepository approachRepository, EvaluationRepository evaluationRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, ApproachRepository approachRepository, EvaluationRepository evaluationRepository) {
         this.studentRepository = studentRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
         this.approachRepository = approachRepository;
         this.evaluationRepository = evaluationRepository;
     }

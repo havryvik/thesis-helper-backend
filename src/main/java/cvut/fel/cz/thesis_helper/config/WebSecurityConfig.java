@@ -18,7 +18,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String AUTH_ENDPOINT="/thesis_helper/auth";
     private static final String REGISTER_ENDPOINT="/thesis_helper/register";
-    private static final String SUPERVISOR_ENDPOINT="/thesis_helper/students";
 
     @Autowired
     public WebSecurityConfig(TokenProvider tokenProvider){
@@ -35,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_ENDPOINT, REGISTER_ENDPOINT).permitAll()
-               // .antMatchers(SUPERVISOR_ENDPOINT).hasRole("SUPERVISOR")
                 .anyRequest().authenticated()
                 .and()
                 .apply(new Configurer(tokenProvider));

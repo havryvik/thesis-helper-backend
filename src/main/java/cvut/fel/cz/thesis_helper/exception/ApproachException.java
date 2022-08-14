@@ -13,10 +13,6 @@ public class ApproachException extends AbstractException{
         return new ApproachException("Approach for student with id: "+studentId+" was not configured!");
     }
 
-    public static ApproachException weightsDoesNotExists() {
-        return new ApproachException("Weights are not configured!");
-    }
-
     public static ApproachException approachDoesNotSupportWeights() {
         return new ApproachException("To add weights you should configure approach accordingly!");
     }

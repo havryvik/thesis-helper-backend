@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -46,11 +45,12 @@ public class SupervisorController {
     }
 
     @GetMapping("/{studentId}")
+    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public Student getStudent(@PathVariable Integer studentId){
         return studentService.findById(studentId);
     }
 
-    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
+    @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'STUDENT')")
     @GetMapping("/{studentId}/approach")
     public ApproachDto getStudentApproach(@PathVariable Integer studentId){
         return approachService.getApproachByStudentId(studentId);
@@ -73,12 +73,14 @@ public class SupervisorController {
 
     @PutMapping("/{studentId}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public void removeStudent(@PathVariable Integer studentId){
         Student student = studentService.findById(studentId);
         supervisorService.removeStudent(student.getEmail());
     }
 
     @GetMapping("/{studentId}/evaluation")
+    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public EvaluationDto getStudentEvaluation(@PathVariable Integer studentId){
         return supervisorService.getStudentEval(studentId);
     }

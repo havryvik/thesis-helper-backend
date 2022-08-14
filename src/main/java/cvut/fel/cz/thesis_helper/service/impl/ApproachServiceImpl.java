@@ -84,7 +84,9 @@ public class ApproachServiceImpl implements ApproachService {
         if(student.isEmpty())
             throw UserExceptions.userNotFoundById(studentId);
         Student student1 =student.get();
-        if (!Objects.equals(getCurrentUser().getId(), student1.getSupervisor().getId()))
+        Integer currentUserId = getCurrentUser().getId();
+        if (!currentUserId.equals(student1.getSupervisor().getId()) &&
+                !currentUserId.equals(student1.getId()))
             throw UserExceptions.accessDeniedException();
         if(student1.getApproach()==null)
             throw ApproachException.approachDoesNotConfigured(studentId);

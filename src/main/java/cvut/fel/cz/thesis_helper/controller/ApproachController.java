@@ -47,14 +47,14 @@ public class ApproachController {
         approachService.addWeightToApproach(approachId, weights);
     }
 
-    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
+    @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'STUDENT')")
     @GetMapping("{approachId}/weights")
     @ResponseStatus(HttpStatus.OK)
     public Weights getWeights(@PathVariable Integer approachId){
         return approachService.getApproachWeights(approachId);
     }
 
-    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
+    @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'STUDENT')")
     @GetMapping("{approachId}/extra-requirements")
     @ResponseStatus(HttpStatus.OK)
     public List<RequirementDto> getExtraRequirementsByApproachId(@PathVariable Integer approachId){
