@@ -21,6 +21,8 @@ Backend aplikace je věřejně dostupný na adrese: https://gitlab.fel.cvut.cz/h
    4.4 V application.properties souboru projektu (složka resources) nastavte následující data:
 
    spring.datasource.url = jdbc:postgresql://localhost:5432/thesis_helper 	spring.datasource.username=/vami nastaveny username/ 	spring.datasource.password=/vami nastavene heslo/
+   
+   4.5 Po spuštění serveru (viz krok č. 6) zkontrolujte, že tabulka "role" obsahuje dva řádky s rolí "SUPERVISOR" a "ŠTUDENT". Pokud ne, ručně spustě data.sql soubor (path src/main/resources) pro naplnění této tabulky.
 
 5. Zkontrolujte Run/Debug Spring Boot Configuration: použití Java SDK 13 a main class - cvut.fel.cz.thesis_helper.ThesisHelperApplication
 
